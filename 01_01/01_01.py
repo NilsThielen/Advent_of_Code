@@ -3,10 +3,10 @@ with open('calories.txt') as caloriesList:
     document = caloriesList.read()
 
     for entry in document.split('\n\n'):
-        sum = 0
+        calorieSum = 0
         for line in entry.split('\n'):
-            sum += int(line)
-        calories.append(sum)
+            calorieSum += int(line)
+        calories.append(calorieSum)
 
     calories.sort()
     print(calories[-1])
