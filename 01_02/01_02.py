@@ -1,4 +1,4 @@
-with open('calories.txt') as caloriesList:
+with open('input.txt') as caloriesList:
     calories = []
     document = caloriesList.read()
 
