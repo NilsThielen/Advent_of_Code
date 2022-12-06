@@ -7,7 +7,6 @@ groups = [document[n:n+groupSize] for n in range(0,len(document), groupSize)]
 
 priorities  = 0
 
-
 for group in groups:
     for letter in group[0]:
         matchCount = 0
@@ -16,10 +15,9 @@ for group in groups:
             
             if letter in group[i]:
                 matchCount += 1
+
         if matchCount == groupSize - 1:
             priorities += letters.index(letter) + 1
             break
-        
-        
 
 print(priorities)
