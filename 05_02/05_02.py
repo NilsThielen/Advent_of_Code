@@ -4,6 +4,7 @@ moves = [move.strip('move ').split(' ') for move in document.read().splitlines()
 for move in moves:
     move.remove('from')
     move.remove('to')
+
     for i, string in enumerate(move):
         move[i] = int(string)
 
@@ -22,8 +23,9 @@ stacks =[
 
 
 def moveCargo(amount, source, target):
-    for i in range(amount):
-        stacks[target-1].append(stacks[source-1].pop())
+    moveStack = stacks[source-1][-amount:]
+    stacks[target - 1] += moveStack
+    del stacks[source-1][-amount:]
 
 for move in moves:
     moveCargo(move[0], move[1], move[2])
