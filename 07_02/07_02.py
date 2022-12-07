@@ -17,7 +17,6 @@ def main(console):
     directories = {'root' : 0}
     currentHierarchy = ['root']
     currentDepth = 1
-    smallDirsSum = 0
 
     for line in console:
         firstInLine = line.split(' ')[0]
