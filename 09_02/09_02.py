@@ -9,6 +9,8 @@ startPos = int(gridSize / 2)
 vizGrid = [['_' for n in range(gridSize)] for n in range(gridSize)]
 visitedGrid = [[0 for n in range(gridSize)] for n in range(gridSize)]
 
+print(visitedGrid)
+
 vizGrid[startPos][startPos] = 'H'
 visitedGrid[startPos][startPos] = 1
 
