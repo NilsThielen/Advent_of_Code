@@ -13,9 +13,7 @@ def runCycle(document):
     crtCol = ((cycleNum - 1) % 40)
     crtRow = int((cycleNum - 1) / 40)
 
-    if crtCol == x : crtDisplay[crtRow][crtCol] = '#'
-    if crtCol == x + 1 : crtDisplay[crtRow][crtCol] = '#'
-    if crtCol == x - 1 : crtDisplay[crtRow][crtCol] = '#'
+    if crtCol == x or crtCol == x-1 or crtCol == x+1 : crtDisplay[crtRow][crtCol] = '#'
 
     line = document[lineNum]
     
@@ -24,31 +22,20 @@ def runCycle(document):
     if line.split(' ')[0] == 'addx':
             
             if cycleNum == addCycle:
+                if int(line.split(' ')[1]) < 0: x += int(line.split(' ')[1])
+                else: x += int(line.split(' ')[1])
 
-                if int(line.split(' ')[1]) < 0:
-                    x += int(line.split(' ')[1])
-                    addCycle += 1
-                    lineNum += 1
+                addCycle += 1
 
-                elif int(line.split(' ')[1]) > 0:
-                    x += int(line.split(' ')[1])
-                    addCycle += 1
-                    lineNum += 1
-
-
-            elif cycleNum < addCycle:
+            elif lineNum < len(document):
                 cycleNum += 1
-                try: runCycle(document)
-                except: return
+                runCycle(document)
 
-    if line == 'noop': lineNum += 1
-
+    lineNum += 1
     addCycle += 1
     cycleNum += 1
 
-    try: runCycle(document)
-    except: return
-
+    if lineNum < len(document): runCycle(document)
 
 
 runCycle(document)

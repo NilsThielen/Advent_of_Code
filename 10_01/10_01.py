@@ -9,49 +9,31 @@ signalStrengths =  []
 
 def runCycle(document):
     global counter, x, addCycle, lineNum, cycleNum, signalStrengths, drawCycle
-
-
-
+    
     line = document[lineNum]
     
     print('instruction =', line, '\t', 'x = ',  x, '\t', 'cyc = ', cycleNum)
 
     if cycleNum == 20: signalStrengths.append(cycleNum * x)
-    if cycleNum == 60: signalStrengths.append(cycleNum * x)
-    if cycleNum == 100: signalStrengths.append(cycleNum * x)
-    if cycleNum == 140: signalStrengths.append(cycleNum * x)
-    if cycleNum == 180: signalStrengths.append(cycleNum * x)
-    if cycleNum == 220: signalStrengths.append(cycleNum * x)
+    elif (cycleNum - 20) % 40 == 0: signalStrengths.append(cycleNum * x)
 
-    if line.split(' ')[0] == 'addx':
-            
+    if line.split(' ')[0] == 'addx':       
+
             if cycleNum == addCycle:
+                if int(line.split(' ')[1]) < 0: x += int(line.split(' ')[1])
+                else: x += int(line.split(' ')[1])
 
-                if int(line.split(' ')[1]) < 0:
-                    x += int(line.split(' ')[1])
-                    addCycle += 1
-                    lineNum += 1
+                addCycle += 1
 
-                elif int(line.split(' ')[1]) > 0:
-                    x += int(line.split(' ')[1])
-                    addCycle += 1
-                    lineNum += 1
-
-
-            elif cycleNum < addCycle:
+            elif lineNum < len(document):
                 cycleNum += 1
-                try: runCycle(document)
-                except: return
+                runCycle(document)
 
-    if line == 'noop': lineNum += 1
-
+    lineNum += 1
     addCycle += 1
-
     cycleNum += 1
 
-    try: runCycle(document)
-    except: return
-
+    if lineNum < len(document): runCycle(document)
 
 
 runCycle(document)
